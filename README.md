@@ -16,7 +16,7 @@ This repository contains a Python script for processing plate data from XML file
 
 ## Introduction
 
-Plate Data Processing is a Python script designed to extract and manipulate data from XML files containing plate information. It converts this data into a more accessible format and copies associated images for further analysis or processing.
+Plate Data Processing is a Python script designed to extract and manipulate data from XML files containing plate information. It converts the data into a more accessible format and copies the related images for further analysis or processing. This code is made for Iranian license plates to convert the Persian classes in the xml file to the yolot file.
 
 ## Installation
 
