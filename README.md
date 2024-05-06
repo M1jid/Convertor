@@ -47,8 +47,10 @@ Suppose you have XML files containing plate data in the directory E:/plate/train
 ## Contributing
 Contributions are welcome! Please feel free to fork the repository and submit pull requests to suggest improvements or additional features.
 
+## Resources
 
-## About the Author
+- **IR-LPR Dataset:** This project utilizes the [IR-LPR dataset](https://github.com/mut-deep/IR-LPR), a large dataset of Iranian license plates.
+
 ## About the Author
 
 **Majid Nargesi** is a passionate programmer interested in computer vision and machine learning. You can find more about them on their [LinkedIn](https://www.linkedin.com/in/majid-nargesi).
