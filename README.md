@@ -35,5 +35,21 @@ Run the script using Python:
 ```bash
 python plate_data_processing.py
 ```
+
+## Dependencies
+os: Provides a portable way to use operating system-dependent functionality.
+shutil: Offers a higher-level interface for file operations.
+xmltodict: Converts XML data to Python dictionaries.
+
+## Example
+Suppose you have XML files containing plate data in the directory E:/plate/train/x. To process this data and generate text files along with associated images in the directory E:/plate/train2, run the script as described in the Usage section.
+
+## Contributing
+Contributions are welcome! Please feel free to fork the repository and submit pull requests to suggest improvements or additional features.
+
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
    
 
