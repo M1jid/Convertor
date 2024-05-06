@@ -1,72 +1,52 @@
-import glob
 import os
-import pickle
-import xml.etree.ElementTree as ET
-from os import listdir, getcwd
-from os.path import join
+import shutil
+import xmltodict
+#کلاس های موجود در فایل های ما
+Class = {"0": 0, "1": 1, "2": 2,"3": 3, "4": 4, "5": 5,"6": 6, "7": 7, "8": 8,"9": 9, "الف": 10, "ب": 12,"پ": 13, "ت": 14, "ث": 15,"ج": 16, "چ": 17, "ح": 18,
+       "خ": 19, "د": 20, "ذ": 21,"ر": 22, "ز": 23, "ژ (معلولین و جانبازان)": 24,"س": 25, "ش": 26, "ص": 27,"ض": 28, "ط": 29, "ظ": 30,"ع": 31, "غ": 32, "ف": 33,"ق": 34, "ک": 35, "گ": 36,
+       "ل": 37, "م": 38, "ن": 39,"و": 40, "ه‍": 41, "ی": 42}
 
-dirs = ['E:/plate/train/train']
-classes = ['0','1','2','3','4','5','6','7','8','9','آ','ب','پ','ت','ث','ج','چ','ح','د','ذ',
-    'ر','ز','ژ','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ک','گ','ل','م','ن','و','ه','ی']
+#پوشه دیتای ورودی
+images = 'E:/plate/train/x'
+#پوشه خروجی
+output_pass = 'E:/plate/train2/'
 
-def getImagesInDir(dir_path):
-    image_list = []
-    for filename in glob.glob(dir_path + '/*.jpg'):
-        image_list.append(filename)
+contents = os.listdir(images)
+temp = []
 
-    return image_list
+for img in contents:
+    temp = f'E:/plate/train/x/{img}'
+    if 'xml' in temp:
+        with open(temp, encoding='utf-8') as xml_file:
+            xml_data = xml_file.read()
 
-def convert(size, box):
-    dw = 1./(size[0])
-    dh = 1./(size[1])
-    x = (box[0] + box[1])/2.0 - 1
-    y = (box[2] + box[3])/2.0 - 1
-    w = box[1] - box[0]
-    h = box[3] - box[2]
-    x = x*dw
-    w = w*dw
-    y = y*dh
-    h = h*dh
-    return (x,y,w,h)
+            dict_data = xmltodict.parse(xml_data)
 
-def convert_annotation(dir_path, output_path, image_path):
-    basename = os.path.basename(image_path)
-    basename_no_ext = os.path.splitext(basename)[0]
+            for item in dict_data['annotation']['object']:
+                for i in Class.keys():
+                    if item['name'] == i:
+                        item['name'] = Class[i]
 
-    in_file = open(dir_path + '/' + basename_no_ext + '.xml')
-    out_file = open(output_path + basename_no_ext + '.txt', 'w')
-    tree = ET.parse(in_file)
-    root = tree.getroot()
-    size = root.find('size')
-    w = int(size.find('width').text)
-    h = int(size.find('height').text)
+            txt_filename = f'{output_pass}' + os.path.splitext(img)[0] + '.txt'
+            txt_filepath = os.path.join(txt_filename)
+            with open(txt_filepath, 'w', encoding='utf-8') as txt_file:
+                for item in dict_data['annotation']['object']:
+                    for i in Class.keys():
+                        if item['name'] == i:
+                            item['name'] = str(Class[i])
+                    txt_file.write(
+                        f"{item['name']} {float(item['bndbox']['xmin'])} {float(item['bndbox']['ymin'])} {float(item['bndbox']['xmax'])} {float(item['bndbox']['ymax'])}\n")
 
-    for obj in root.iter('object'):
-        difficult = obj.find('difficult').text
-        cls = obj.find('name').text
-        if cls not in classes or int(difficult)==1:
-            continue
-        cls_id = classes.index(cls)
-        xmlbox = obj.find('bndbox')
-        b = (float(xmlbox.find('xmin').text), float(xmlbox.find('xmax').text), float(xmlbox.find('ymin').text), float(xmlbox.find('ymax').text))
-        bb = convert((w,h), b)
-        out_file.write(str(cls_id) + " " + " ".join([str(a) for a in bb]) + '\n')
+    elif 'jpg' in temp:
+        shutil.copy(temp, output_pass)
 
-cwd = getcwd()
 
-for dir_path in dirs:
-    full_dir_path = cwd + '/' + dir_path
-    output_path = full_dir_path +'/yolo/'
 
-    if not os.path.exists(output_path):
-        os.makedirs(output_path)
 
-    image_paths = getImagesInDir(full_dir_path)
-    list_file = open(full_dir_path + '.txt', 'w')
 
-    for image_path in image_paths:
-        list_file.write(image_path + '\n')
-        convert_annotation(full_dir_path, output_path, image_path)
-    list_file.close()
 
-    print("Finished processing: " + dir_path)
+
+
+
+
+
