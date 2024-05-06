@@ -24,3 +24,16 @@ Plate Data Processing is a Python script designed to extract and manipulate data
 
    ```bash
    git clone https://github.com/your-username/plate-data-processing.git
+   cd plate-data-processing
+   pip install -r requirements.txt
+   ```
+   
+## Usage
+Modify the images and output_pass variables in the script to specify the input and output directories.
+Run the script using Python:
+
+```bash
+python plate_data_processing.py
+```
+   
+
