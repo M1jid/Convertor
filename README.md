@@ -12,6 +12,7 @@ This repository contains a Python script for processing plate data from XML file
 - [Dependencies](#dependencies)
 - [Example](#example)
 - [Contributing](#contributing)
+- [Resources](#resources)
 - [About the Author](#About)
 
 ## Introduction
