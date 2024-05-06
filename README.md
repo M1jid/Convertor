@@ -1,6 +1,6 @@
 # Plate Data Processing
 
-![Plate Data Processing](plate_data_processing.jpg)
+![Plate Data Processing](car-plate-iran.jpg)
 
 This repository contains a Python script for processing plate data from XML files. It includes a comprehensive guide on how to use the script, dependencies, and an example.
 
