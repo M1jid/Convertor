@@ -12,7 +12,7 @@ This repository contains a Python script for processing plate data from XML file
 - [Dependencies](#dependencies)
 - [Example](#example)
 - [Contributing](#contributing)
-- [License](#license)
+- [About the Author](#About)
 
 ## Introduction
 
@@ -48,8 +48,8 @@ Suppose you have XML files containing plate data in the directory E:/plate/train
 Contributions are welcome! Please feel free to fork the repository and submit pull requests to suggest improvements or additional features.
 
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+## About the Author
+## About the Author
 
-   
+**Majid Nargesi** is a passionate programmer interested in computer vision and machine learning. You can find more about them on their [LinkedIn](https://www.linkedin.com/in/majid-nargesi).
 
