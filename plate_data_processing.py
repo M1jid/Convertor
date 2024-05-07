@@ -2,21 +2,25 @@ import os
 import shutil
 import xmltodict
 #کلاس های موجود در فایل های ما
-Class = {"0": 0, "1": 1, "2": 2,"3": 3, "4": 4, "5": 5,"6": 6, "7": 7, "8": 8,"9": 9, "الف": 10, "ب": 12,"پ": 13, "ت": 14, "ث": 15,"ج": 16, "چ": 17, "ح": 18,
-       "خ": 19, "د": 20, "ذ": 21,"ر": 22, "ز": 23, "ژ (معلولین و جانبازان)": 24,"س": 25, "ش": 26, "ص": 27,"ض": 28, "ط": 29, "ظ": 30,"ع": 31, "غ": 32, "ف": 33,"ق": 34, "ک": 35, "گ": 36,
-       "ل": 37, "م": 38, "ن": 39,"و": 40, "ه‍": 41, "ی": 42}
+Class = {"0": 0, "1": 1, "2": 2,"3": 3, "4": 4, "5": 5,"6": 6, "7": 7, "8": 8,"9": 9, "الف": 10, "ب": 11,"پ": 12, "ت": 13, "ث": 14,"ج": 15,
+       "د": 16, "ز": 17, "ژ (معلولین و جانبازان)": 18,"س": 19, "ش": 20, "ص": 21, "ط": 22,
+       "ع": 23, "ف": 24,"ق": 25,"ل": 26, "م": 27, "ن": 28,"و": 29, "ه‍": 30, "ی": 31}
+
+
 
 #پوشه دیتای ورودی
-images = 'E:/plate/train/x'
-#پوشه خروجی
-output_pass = 'E:/plate/train2/'
+images = 'E:/plate/not/test/test'
+
+
 
 contents = os.listdir(images)
 temp = []
 
 for img in contents:
-    temp = f'E:/plate/train/x/{img}'
+    temp = f'E:/plate/not/test/test/{img}'
     if 'xml' in temp:
+        # پوشه خروجی لیبل ها 
+        output_pass = 'E:/plate/yolo_plate_data/test/labels/'
         with open(temp, encoding='utf-8') as xml_file:
             xml_data = xml_file.read()
 
@@ -38,6 +42,8 @@ for img in contents:
                         f"{item['name']} {float(item['bndbox']['xmin'])} {float(item['bndbox']['ymin'])} {float(item['bndbox']['xmax'])} {float(item['bndbox']['ymax'])}\n")
 
     elif 'jpg' in temp:
+        #پوشه خروجی تصاویر
+        output_pass = 'E:/plate/yolo_plate_data/test/images/'
         shutil.copy(temp, output_pass)
 
 
